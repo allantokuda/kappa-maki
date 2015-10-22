@@ -9,6 +9,5 @@ Gem::Specification.new do |s|
   s.files       = ["lib/kappa-maki.rb"]
   s.homepage    = 'http://rubygems.org/gems/kappa-maki'
   s.license     = 'MIT'
-  s.add_development_dependency 'cucumber-ruby', '~> 2.1'
-  s.add_runtime_dependency 'rspec', '~> 3.1'
+  s.add_runtime_dependency 'cucumber', '~> 2.1'
 end

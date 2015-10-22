@@ -1,4 +1,4 @@
-require 'rspec'
+require 'multi_test'
 
 module Cucumber
   module Features
@@ -6,7 +6,6 @@ module Cucumber
   end
 
   class FeatureSteps
-    include RSpec::Matchers
     def self.namespace
       self.name.split('::').last
     end
@@ -42,6 +41,7 @@ module Cucumber
 
       delegate_block = Proc.new do
         @instance ||= feature_class.new
+        MultiTest.extend_with_best_assertion_library(@instance)
         @instance.send method_name
       end
 
