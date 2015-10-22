@@ -2,5 +2,4 @@ source 'https://rubygems.org'
 
 gem 'pry'
 gem 'cucumber', '>=2.1'
-gem 'rspec'
-
+gem 'kappa-maki', path: '..'
