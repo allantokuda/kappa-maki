@@ -7,20 +7,20 @@ module Cucumber
 
   class FeatureSteps
     include RSpec::Matchers
-    def self.short_name
-      self.name.split('::').last 
+    def self.namespace
+      self.name.split('::').last
     end
 
-    def self.underscore(step_string)
+    def self.underscore_step_name(step_string)
       step_string.gsub(/[^a-zA-Z0-9!?]/, '_').downcase.to_sym
     end
 
-    def self.camelize(feature_name)
+    def self.camelize_feature_name(feature_name)
       feature_name.gsub(/[^a-zA-Z0-9!?]/, '')
     end
 
     def self.namespace_step(step_string)
-      "[#{self.short_name}] #{step_string}"
+      "[#{self.namespace}] #{step_string}"
     end
 
     def self.step(step_string, &block)
@@ -28,7 +28,7 @@ module Cucumber
         raise "Feature-scoped step definitions do not allow regular expressions. Use simple strings instead."
       end
 
-      method_name = self.underscore(step_string)
+      method_name = self.underscore_step_name(step_string)
 
       if method_name.length < 3
         raise "Step definition must be at least 3 characters long. Step: '#{step_string}'"
@@ -52,13 +52,19 @@ end
 
 module SupportCode_NamespacedSteps
   def find_match(test_step)
-    namespace = Cucumber::FeatureSteps.camelize test_step.source.first.short_name
-    feature = Cucumber::Features.const_get namespace
-    @feature ||= feature.new
-    underscored_step = Cucumber::FeatureSteps.underscore(test_step.name)
+    feature_name = test_step.source.first.short_name
+
+    feature_namespace = Cucumber::FeatureSteps.camelize_feature_name(feature_name)
+    underscored_step = Cucumber::FeatureSteps.underscore_step_name(test_step.name)
+
+    # Instantiate the feature steps class for the duration of the scenario, if not already.
+    # Instance variables will be scoped therein, and only usable for the life of the scenario.
+    feature_class = Cucumber::Features.const_get(feature_namespace)
+    @feature ||= feature_class.new
 
     begin
-      step_match(feature.namespace_step(test_step.name))
+      # Local (namespaced) step definitions override global ones, if both are defined.
+      step_match(feature_class.namespace_step(test_step.name))
     rescue Cucumber::Undefined
       super
     end
