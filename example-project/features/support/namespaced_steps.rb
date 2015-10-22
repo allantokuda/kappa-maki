@@ -1,20 +1,3 @@
-#module Runtime_ExtensionForNamespacedSteps
-#  def load_namespaced_step_definitions
-#    puts 'loading namespaced step definitions!'
-#  end
-#
-#  def load_step_definitions
-#    super
-#    load_namespaced_step_definitions
-#  end
-#end
-#
-#module Cucumber
-#  class Runtime
-#    prepend Runtime_ExtensionForNamespacedSteps
-#  end
-#end
-
 module Cucumber
   module Features
     # This is the module where users will add their features.
@@ -64,23 +47,6 @@ module Cucumber
   end
 end
 
-class StepDefinitionBridge
-  attr_reader :feature, :step
-
-  def initialize(feature, step)
-    @feature = feature
-    @step = step
-  end
-
-  def location
-    step.location
-  end
-
-  def invoke(args)
-    feature.send(step)
-  end
-end
-
 module SupportCode_NamespacedSteps
   def find_match(test_step)
     namespace = Cucumber::FeatureSteps.camelize test_step.source.first.short_name
@@ -101,12 +67,5 @@ module Cucumber
     class SupportCode
       prepend SupportCode_NamespacedSteps
     end
-  end
-end
-
-AfterConfiguration do |config|
-  # TODO: instantiate each of the feature methods
-  Cucumber::Features.constants.each do |feature_name|
-    feature = Cucumber::Features.const_get(feature_name)
   end
 end
