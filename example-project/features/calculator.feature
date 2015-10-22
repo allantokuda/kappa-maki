@@ -1,4 +1,4 @@
-Feature: Calculator
+Feature: Cool Calculator
 
   Scenario: Add two numbers
     Given I have entered two numbers into the calculator

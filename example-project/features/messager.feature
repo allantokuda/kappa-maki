@@ -1,6 +1,4 @@
-@enforce_local_steps
-
-Feature: Messager
+Feature: Marvellous Messager
 
   Scenario: Send a message
     Given I have initiated a messaging session with a friend
@@ -10,6 +8,7 @@ Feature: Messager
 
   Scenario: Add a friend
     Given I have initiated a messaging session
+    And something standard is set up in mode 5
     And I am viewing the Add Friend dialog
     When I enter the username of my friend
 
