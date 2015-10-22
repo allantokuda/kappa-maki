@@ -1,9 +1,12 @@
+require 'rspec'
+
 module Cucumber
   module Features
     # This is the module where users will add their features.
   end
 
   class FeatureSteps
+    include RSpec::Matchers
     def self.short_name
       self.name.split('::').last 
     end

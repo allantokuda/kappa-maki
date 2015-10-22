@@ -3,26 +3,18 @@ Given /something standard is set up in mode (\d+)/ do |mode_num|
 end
 
 class Cucumber::Features::MarvellousMessager < Cucumber::FeatureSteps
-  #require 'pry'
   step 'I have initiated a messaging session with a friend' do
-    #create_user('allan', 'password')
-    #create_user('zeff', 'password')
-    #login_as('allan', 'password')
-    #initiate_messaging_session('allan', 'zeff')
+    @session = 'session 1'
   end
 
   step 'I enter a message' do
-    #within_session('allan') { type_message('hello zeff') }
   end
 
   step 'press Send' do
-    #within_session('allan') { send_message }
+    expect(@session).to eq 'session 2'
   end
 
   step 'my friend receives the message' do
-    #within_session('zeff') do
-    #  expect_message('hello zeff')
-    #end
   end
 
   step 'I have initiated a messaging session' do
