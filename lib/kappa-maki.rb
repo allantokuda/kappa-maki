@@ -47,6 +47,11 @@ module Cucumber
 
       Cucumber::RbSupport::RbDsl.register_rb_step_definition(namespaced_step, delegate_block)
     end
+
+    # Basic `pending` support only: no support for passing a block (for now, for simplicity)
+    def pending(message = "TODO")
+      raise Pending, message
+    end
   end
 end
 
