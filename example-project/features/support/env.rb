@@ -1,1 +1,0 @@
-require 'kappa-maki'

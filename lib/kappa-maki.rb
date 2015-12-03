@@ -40,7 +40,7 @@ module Cucumber
       feature_class = self
 
       delegate_block = Proc.new do
-        @instance ||= feature_class.new
+        @instance = feature_class.new if @instance.class != feature_class
         MultiTest.extend_with_best_assertion_library(@instance)
         @instance.send method_name
       end
