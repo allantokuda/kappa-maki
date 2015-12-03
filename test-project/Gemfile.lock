@@ -1,3 +1,9 @@
+PATH
+  remote: ..
+  specs:
+    kappa-maki (0.0.5)
+      cucumber (~> 2.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -14,8 +20,6 @@ GEM
       gherkin3 (~> 3.1.0)
     diff-lcs (1.2.5)
     gherkin3 (3.1.2)
-    kappa-maki (0.0.5)
-      cucumber (~> 2.0)
     method_source (0.8.2)
     multi_json (1.11.2)
     multi_test (0.1.2)
@@ -42,7 +46,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  cucumber
-  kappa-maki
+  cucumber (>= 2.1)
+  kappa-maki!
   pry
   rspec
