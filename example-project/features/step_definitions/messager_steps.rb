@@ -11,7 +11,7 @@ class Cucumber::Features::MarvellousMessager < Cucumber::FeatureSteps
   end
 
   step 'press Send' do
-    expect(@session).to eq 'session 2'
+    expect(@session).to eq 'session 1'
   end
 
   step 'my friend receives the message' do
