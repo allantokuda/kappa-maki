@@ -1,7 +1,5 @@
 # Kappa-Maki Gem
 
-## Overview
-
 **kappa-maki** gives Cucumber users the option to write local step definitions and pure ruby methods, both declared as belonging only to a particular feature, and not usable for testing any other feature. This provides encapsulation, for large and complex projects that may encounter difficulty scaling their Cucumber test suite. This is based on the same operating principles as [Spinach](http://codegram.github.io/spinach/).
 
 The gem does not prevent the declaration use of normal globally shared (entire-World) steps. If both are defined with the same string, the local step definition takes precedence.
@@ -10,14 +8,19 @@ The gem does not prevent the declaration use of normal globally shared (entire-W
 
 * Include in your `Gemfile`:
 
+    ```ruby
     gem 'kappa-maki'
+    ```
 
 * Include in your `hooks.rb`:
 
+    ```ruby
     require 'kappa-maki'
+    ```
 
 * Define steps and local methods inside classes:
 
+    ```ruby
     class Cucumber::Features::CoolCalculator < Cucumber::FeatureSteps
       step 'I have entered two numbers into the calculator' do
         enter_two_numbers
@@ -37,9 +40,10 @@ The gem does not prevent the declaration use of normal globally shared (entire-W
         puts 'Entering two numbers 12 and 42'
       end
     end
+    ```
 
 
-## Notes:
+## Notes
 
 * The `step` method is used instead of `Given`, `When`, `Then`, etc.
 * The `Cucumber::FeatureSteps` is the superclass. The `<` declares that this class is an inheritor. Make a class like this for each feature.
