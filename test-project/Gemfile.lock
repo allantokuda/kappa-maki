@@ -1,7 +1,7 @@
 PATH
   remote: ..
   specs:
-    kappa-maki (0.0.5)
+    kappa-maki (0.0.6)
       cucumber (~> 2.0)
 
 GEM
@@ -50,3 +50,6 @@ DEPENDENCIES
   kappa-maki!
   pry
   rspec
+
+BUNDLED WITH
+   1.10.6
