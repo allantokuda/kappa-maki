@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
 gem 'pry'
-gem 'cucumber'
+gem 'cucumber', '2.1.0'
 gem 'kappa-maki'
 gem 'rspec'

@@ -10,11 +10,11 @@ GEM
       gherkin3 (~> 3.1.0)
       multi_json (>= 1.7.5, < 2.0)
       multi_test (>= 0.1.2)
-    cucumber-core (1.3.0)
+    cucumber-core (1.3.1)
       gherkin3 (~> 3.1.0)
     diff-lcs (1.2.5)
     gherkin3 (3.1.2)
-    kappa-maki (0.0.5)
+    kappa-maki (0.0.6)
       cucumber (~> 2.0)
     method_source (0.8.2)
     multi_json (1.11.2)
@@ -32,7 +32,7 @@ GEM
     rspec-expectations (3.4.0)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.4.0)
-    rspec-mocks (3.4.0)
+    rspec-mocks (3.4.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.4.0)
     rspec-support (3.4.1)
@@ -42,7 +42,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  cucumber
+  cucumber (= 2.1.0)
   kappa-maki
   pry
   rspec
