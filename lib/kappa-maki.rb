@@ -56,6 +56,7 @@ module Cucumber
 end
 
 module SupportCode_NamespacedSteps
+  # Override Cucumber's find_match method.
   def find_match(test_step)
     feature_name = test_step.source.first.short_name
 
@@ -64,7 +65,7 @@ module SupportCode_NamespacedSteps
 
     # Instantiate the feature steps class for the duration of the scenario, if not already.
     # Instance variables will be scoped therein, and only usable for the life of the scenario.
-    if Cucumber::Features.const_defined?(feature_namespace)
+    match = if Cucumber::Features.const_defined?(feature_namespace)
       feature_class = Cucumber::Features.const_get(feature_namespace)
       @feature ||= feature_class.new
 
@@ -77,11 +78,23 @@ module SupportCode_NamespacedSteps
     else
       super
     end
+
+    @configuration.notify Cucumber::Events::StepMatch.new(test_step, match)
+
+    # Need to copy Cucumber's dry-run check because the super method may never
+    # be called in the case where the step is locally namespaced.
+    if @configuration.dry_run?
+      return Cucumber::SkippingStepMatch.new
+    end
+    match
   end
 end
 
 module Cucumber
   class Runtime
+    # TODO: the find_match method has been moved to out of SupportCode and into
+    # Filters::ActivateSteps in Cucumber 2.2.0. It will need to be moved for
+    # kappa-maki as well.
     class SupportCode
       prepend SupportCode_NamespacedSteps
     end
