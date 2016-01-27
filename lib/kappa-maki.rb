@@ -79,7 +79,12 @@ module SupportCode_NamespacedSteps
       super
     end
 
-    @configuration.notify Cucumber::Events::StepMatch.new(test_step, match)
+    # Cucumber::Events added in v2.1.0
+    if Cucumber.const_defined?(:Events)
+      if Cucumber::Events.const_defined?(:StepMatch)
+        @configuration.notify Cucumber::Events::StepMatch.new(test_step, match)
+      end
+    end
 
     # Need to copy Cucumber's dry-run check because the super method may never
     # be called in the case where the step is locally namespaced.
